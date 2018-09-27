@@ -3,6 +3,10 @@
 #Date:2018-9-26
 #Email:dyh1243208731@163.com
 #Function:auto copy/update/del id_rsa.pub to each node
+
+# Check if user is root
+[ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+# select num of diff function
 while :; do echo
     echo 'Please select tomcat server:'
     echo -e "\t${CMSG}1${CEND}. Auto Publish id_rsa.pub"
@@ -11,8 +15,9 @@ while :; do echo
 	read -p "Please input a number: " sshkey_option
 	if [[ ! ${sshkey_option} =~ ^[1-3]$ ]]; then
             echo "${CWARNING}input error! Please only input number 1~3${CEND}"
-	
 	else
+	        
+		# add public key to each node and record log 
 		if [ "${sshkey_option}" == '1' ]; then
 			for p in $(cat ./CIP)  
 			do   
@@ -36,6 +41,8 @@ while :; do echo
 						echo "$h succeed" >> sshkey_add.log
 					fi   
 				done
+	       
+	       # del public key to each node and record log 
                 elif [ "${sshkey_option}" == '2' ]; then
 			for h in $(cat ./CIP|cut -f1 -d":")
 				do      
@@ -46,7 +53,8 @@ while :; do echo
 						echo "$h succeed" >> sshkey_del.log
 					fi   
 				done
-				
+		
+		# update public key to each node and record log 		
 		elif [ "${sshkey_option}" == '3' ]; then
 				for h in $(cat ./CIP|cut -f1 -d":")
 				do
@@ -68,7 +76,7 @@ while :; do echo
 					fi   
 		     	        done
 		      fi
-		   break
+		  break
 	    fi
    break
 done
