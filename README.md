@@ -1,6 +1,6 @@
 ### Auto-deploy-sshkey
 - *function* : 
-auto deploy ssh-key.pub to each nodes in DevOps of Ansible
+auto deploy/update/del ssh-key.pub to each nodes in DevOps of Ansible
 - *statement:*
 ```
 [root@jam Auto-deploy-sshkey]# ll
