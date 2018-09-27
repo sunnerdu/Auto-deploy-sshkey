@@ -1,6 +1,6 @@
 #!/bin/bash
 #Auth: sunner_du
-#Date:2018-9-26
+#Date:2017-9-26
 #Email:dyh1243208731@163.com
 #Function:auto copy/update/del id_rsa.pub to each node
 
